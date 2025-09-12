@@ -1,0 +1,98 @@
+{
+  "index.qmd": {
+    "index.html": "11923458"
+  },
+  "01-basics.qmd": {
+    "01-basics.html": "337a0b47"
+  },
+  "02-wrangling.qmd": {
+    "02-wrangling.html": "caa025f0"
+  },
+  "03-wrangling2.qmd": {
+    "03-wrangling2.html": "8ed07ca2"
+  },
+  "04-dataviz.qmd": {
+    "04-dataviz.html": "b3d94fe4"
+  },
+  "05-dataviz2.qmd": {
+    "05-dataviz2.html": "e6323348"
+  },
+  "06-chi-square-one-sample.qmd": {
+    "06-chi-square-one-sample.html": "698ced34"
+  },
+  "07-independent.qmd": {
+    "07-independent.html": "0bcf045f"
+  },
+  "08-paired.qmd": {
+    "08-paired.html": "83f969e9"
+  },
+  "09-correlation.qmd": {
+    "09-correlation.html": "018faf50"
+  },
+  "10-regression.qmd": {
+    "10-regression.html": "7b6dd5f3"
+  },
+  "11-multiple-regression.qmd": {
+    "11-multiple-regression.html": "83cb5841"
+  },
+  "12-one-way-anova.qmd": {
+    "12-one-way-anova.html": "f747d715"
+  },
+  "13-factorial-anova.qmd": {
+    "13-factorial-anova.html": "2f9bf694"
+  },
+  "pc-A01.qmd": {
+    "pc-A01.html": "d92074ae"
+  },
+  "pc-A02.qmd": {
+    "pc-A02.html": "a5c4dee0"
+  },
+  "pc-A03.qmd": {
+    "pc-A03.html": "c4d34820"
+  },
+  "pc-A04.qmd": {
+    "pc-A04.html": "08c62b9b"
+  },
+  "pc-A05.qmd": {
+    "pc-A05.html": "7d3084ec"
+  },
+  "pc-A06.qmd": {
+    "pc-A06.html": "42fa5527"
+  },
+  "pc-A07.qmd": {
+    "pc-A07.html": "fe169816"
+  },
+  "pc-B01.qmd": {
+    "pc-B01.html": "5a1abde6"
+  },
+  "pc-B02.qmd": {
+    "pc-B02.html": "d130eee5"
+  },
+  "pc-B03.qmd": {
+    "pc-B03.html": "b672c5ac"
+  },
+  "pc-B04.qmd": {
+    "pc-B04.html": "616b5151"
+  },
+  "pc-B05.qmd": {
+    "pc-B05.html": "7e936e35"
+  },
+  "pc-B06.qmd": {
+    "pc-B06.html": "a9bf1d21"
+  },
+  "appendix-a-installing-r.qmd": {
+    "appendix-a-installing-r.html": "3be3456d"
+  },
+  "appendix-b-updating-packages.qmd": {
+    "appendix-b-updating-packages.html": "e3fcab75"
+  },
+  "appendix-d-symbols.qmd": {
+    "appendix-d-symbols.html": "118e35d0"
+  },
+  "appendix-x-How-to-cite-R.qmd": {
+    "appendix-x-How-to-cite-R.html": "f003a096"
+  },
+  "appendix-y-license.qmd": {
+    "appendix-y-license.html": "0f0fd131"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "hash": "55672cd216ea161f89799fec8e6b18a0",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# 2B Lab 7 Week 9  {.unnumbered}\n\n\n\n\n\n\n\n\n\n\n**This is the pair coding activity related to @sec-factorial.**\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
