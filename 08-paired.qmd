@@ -277,7 +277,7 @@ For a paired t-test, first, we need to check that we have both measures for each
 
 #### Assumption 3: Normality {.unnumbered}
 
-This assumption requires the **difference scores** to be approximately normally distributed. We cannot see that from the violin-boxplot above (Option 1) and have to plot the difference score, i.e., variable `simon_effect`.
+This assumption requires the **residuals of the difference scores** to be approximately normally distributed. We can use a Q-Q plot again to check this assumption visually. Alternatively, Shapiro-Wilk's could be used as a computational method (with caution given we have a fairly large sample).
 
 ::: {.callout-note icon="false"} 
 
@@ -311,28 +311,15 @@ ggplot(simon_effect, aes(sample = simon_effect)) +
 ```
 
 
-## Option 2: Violin-boxplot of the difference score
 
-You can use the plot from above if you chose Option 2 in Activity 5, or create a new violin-boxplot if you created plot Option 1 above.
-
-```{r}
-ggplot(simon_effect, aes(x = "", y = simon_effect)) +
-  geom_violin(fill = "#FB8D61", alpha = 0.5) + # alpha for opacity, fill for adding colour
-  geom_boxplot(fill = "#FB8D61", width = 0.4) + # change width of the boxes
-  theme_classic() +
-  labs(x = "",
-       y = "Difference in mean Response Time scores")
-```
-
-
-## Option 3: Shapiro-Wilk test
+## Option 2: Shapiro-Wilk test
 
 ```{r}
 shapiro.test(simon_effect$simon_effect)
 ```
 :::
 
-Both plots suggest slight deviations from normality in the tails, which are not detected by the Shapiro-Wilk test. However, minor deviations from normality are acceptable for t-tests, especially in the tails of the distribution. Therefore, we conclude that the difference scores are approximately normally distributed.
+The Q-Q plot suggests slight deviations from normality in the tails, which are not detected by the Shapiro-Wilk test. Minor deviations from normality are acceptable for t-tests, especially in the tails of the distribution. Therefore, we conclude that the difference scores are approximately normally distributed.
 
 :::
 
@@ -416,7 +403,7 @@ The minimum effect size we could reliably detect is 0.22. Our actual effect size
 
 ## Activity 9: The write-up
 
-We hypothesised that there would be a significant difference in the response times between congruent $(M = 427.65 msec, SD = 74.17 msec)$ and incongruent trials $(M = 462.08 msec, SD = 74.70 msec)$ of a Simon task. On average, participants were faster in the congruent compared to the incongruent condition $(M_{diff} = 34.43 msec, SD_{diff} = 21.60 msec)$. Using a within-subjects t-test, the effect was found to be significant and of a large magnitude, $t(159) = 20.16, p < .001, d = 1.59$. Therefore, we reject the null hypothesis in favour of H~1~. The analysis was sufficiently powered to detect this effect.
+We hypothesised that there would be a significant difference in the response times between congruent $(M = 427.65 msec, SD = 74.17 msec)$ and incongruent trials $(M = 462.08 msec, SD = 74.70 msec)$ of a Simon task. On average, participants were faster in the congruent compared to the incongruent condition $(M_{diff} = 34.43 msec, SD_{diff} = 21.60 msec)$. Using a within-subjects t-test, the effect was found to be significant and of a large magnitude, $t(159) = 20.16, p < .001, 95\% CI = [31.05, 37.80], d = 1.59$. Therefore, we reject the null hypothesis in favour of H~1~. The analysis was sufficiently powered to detect this effect.
 
 
 ## Activity 10: Non-parametric alternative {#sec-alternative_paired}

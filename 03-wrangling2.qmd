@@ -41,7 +41,7 @@ qrp_t1 <- read_csv("???")
 ```{r include=FALSE, message=TRUE}
 ## I basically have to have 2 code chunks since I tell them to put the data files next to the project, and mine are in a separate folder called data - unless I'll turn this into a fixed path
 library(tidyverse)
-data_prp <- read_csv("data/prp_data_reduced.csv")
+data_prp <- read_csv("data/data_prp_for_ch3.csv")
 qrp_t1 <- read_csv("data/qrp_t1.csv")
 ```
 
@@ -53,7 +53,7 @@ qrp_t1 <- read_csv("data/qrp_t1.csv")
 
 ```{r eval=FALSE}
 library(tidyverse)
-data_prp <- read_csv("prp_data_reduced.csv")
+data_prp <- read_csv("data_prp_for_ch3.csv")
 qrp_t1 <- read_csv("qrp_t1.csv")
 ```
 

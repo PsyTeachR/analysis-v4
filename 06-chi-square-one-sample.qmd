@@ -449,38 +449,11 @@ If you decide to remove any outliers, remember to recalculate the descriptive st
 
 :::
 
-#### Assumption 4: DV should be approximately normally distributed {.unnumbered}
+#### Assumption 4: Normality {.unnumbered}
 
-We can already check normality from the violin-boxplot above but you could also use a histogram, a density plot, or a Q-Q plot as an alternative to assess normality visually.
+A Q-Q plot is the best way to check whether the **residuals of the DV are approximately normally distributed** visually. The Shapiro-Wilk's test is a computational alternative suitable for small sample sizes.
 
-Each of these options shows that **the data is normally distributed**. This allows us to proceed with a parametric test, specifically a one-sample t-test.
-
-::: {.callout-note collapse="true" icon="false"}
-
-## Alternatives to visually assess normality
-
-::: {.panel-tabset}
-
-## Histogram
-
-We've already covered histograms in @sec-dataviz2. 
-
-```{r}
-ggplot(one_sample, aes(x = wemwbs_sum)) +
-  geom_histogram(binwidth = 1, fill = "magenta")
-```
-
-## Density plot
-
-A density plot shows a smooth distribution curve of the data. Unlike a histogram, the height of the curve reflects the proportion of data within each range rather than the frequency of individual values. This means the curve shows where data points are concentrated, not how many times each value appears.
-
-```{r}
-ggplot(one_sample, aes(x = wemwbs_sum)) +
-  geom_density(fill = "magenta")
-```
-
-
-## Q-Q plot
+##### Q-Q plot {.unnumbered}
 
 Q-Q plot stands for Quantile-Quantile Plot and compare two distributions by matching a common set of quantiles. Essentially, it compares the distribution of your data to a normal distribution and plots the points along a 45-degree line.
 
@@ -509,10 +482,10 @@ ggplot(one_sample, aes(sample = wemwbs_sum)) +
 
 ```
 
-:::
+Both options show that **the residuals are normally distributed**. This allows us to proceed with a parametric test, specifically a one-sample t-test.
 
-:::
 
+##### Alternative: Shapiro Wilk's test {.unnumbered}
 
 You could also assess normality with the **Shapiro-Wilk’s test**. The null hypothesis is that the population is distributed normally. Therefore, if the p-value of the Shapiro-Wilk’s test smaller than .05, normality is rejected. 
 
@@ -591,7 +564,7 @@ So the smallest effect size we can detect with a sample size of 1083, an alpha l
 
 ### Task 7: The write-up
 
-A one-sample t-test was computed to determine whether the average mental well-being of gamers as measured by the WEMWBS was different to the population well-being mean. The average WEMWBS of the gamers $(N = 1083, M = 45.42, SD = 10.89)$ was significantly lower than the population mean well-being score of 51.0, $t(1082) = 16.87, p < .001, d = .51$. The strength of the effect is considered medium and the study was sufficiently powered. We therefore reject the null hypothesis in favour of H~1~. 
+A one-sample t-test was computed to determine whether the average mental well-being of gamers as measured by the WEMWBS was different to the population well-being mean. The average WEMWBS of the gamers $(N = 1083, M = 45.42, SD = 10.89)$ was significantly lower than the population mean well-being score of 51.0, $t(1082) = 16.87, p < .001, 95\% CI = [44.77, 46.07], d = .51$. The strength of the effect is considered medium and the study was sufficiently powered. We therefore reject the null hypothesis in favour of H~1~. 
 
 
 

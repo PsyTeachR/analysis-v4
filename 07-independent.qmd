@@ -50,7 +50,7 @@ The data and supplementary materials are available on OSF: [https://osf.io/ghv6m
 
 ## Activity 2: Library and data for today
 
-Today, we’ll be using the following packages: `rstatix`, `tidyverse`, `car`, `lsr`, and `pwr`. You may need to install the packages before using them (see @sec-install_packages if you need some help). Make sure that `rstatix` is loaded in before `tidyverse` to avoid masking certain functions that we will need later.
+Today, we’ll be using the following packages: `rstatix`, `tidyverse`, `car`,  `lsr`, `qqplotr`,and `pwr`. You may need to install the packages before using them (see @sec-install_packages if you need some help). Make sure that `rstatix` is loaded in before `tidyverse` to avoid masking certain functions that we will need later.
 
 We will also read in the data from `MeansSimonTask.csv`  and the demographic information from `DemoSimonTask.csv`.
 
@@ -70,6 +70,7 @@ library(rstatix)
 library(tidyverse)
 library(car)
 library(lsr)
+library(qqplotr)
 library(pwr)
 
 zwaan_data <- read_csv("data/MeansSimonTask.csv")
@@ -89,6 +90,7 @@ library(rstatix)
 library(tidyverse)
 library(car)
 library(lsr)
+library(qqplotr)
 library(pwr)
 
 # read in the data
@@ -267,20 +269,30 @@ This means that even if Levene’s test returns a significant p-value, indicatin
 
 
 
-#### Assumption 4: DV should be approximately normally distributed {.unnumbered}
+#### Assumption 4: Normality {.unnumbered}
 
-It’s important to note that this assumption requires the **dependent variable to be normally distributed within each group**.
+It’s important to note that this assumption requires the **residuals of the DV to be normally distributed within each group**.
 
-We can either use our eyeballs again on the violin-boxplot we created earlier (or use a qqplot, density plot, or histogram instead), OR compute a statistic like the Shapiro-Wilk's test we already mentioned previously for the one-sample t-test. However, keep in mind that with large sample sizes (approximately 80 participants per group), this test may flag minor deviations from normality as significant, even if the data is reasonably normal.
+We can either use a Q-Q plot OR compute a statistic like the Shapiro-Wilk's test we already mentioned previously for the one-sample t-test. However, keep in mind that with large sample sizes (approximately 80 participants per group), this test may flag minor deviations from normality as significant, even if the data is reasonably normal.
 
+##### Q-Q plot {.unnumbered}
 
-Visual inspection suggests that both groups are approximately normally distributed. The **"same" group** appears slightly more normally distributed than the **"different" group**, which has a small peak in the lower tail. Despite this, both distributions seem normal enough for practical purposes with real-world data.
+Let's use `ggplot2` in combination with the `qqplotr` package to create our **Q-Q plots**. To display the plots separately for each group, we can simply add a `facet_wrap()` function.
+
+```{r}
+ggplot(simon_effect, aes(sample = simon_effect)) +
+  stat_qq_band(fill = "#FB8D61", alpha = 0.4) +
+  stat_qq_line(colour = "#FB8D61") +
+  stat_qq_point() +
+  facet_wrap(~similarity)
+
+```
+
+Visual inspection suggests that both groups are approximately normally distributed. There are slight deviations in the tails, however, both distributions seem normal enough for practical purposes with real-world data.
 
 ::: {.callout-tip} 
 
 ## Tip: Visual inspection
-
-If you want to use a histogram, density plot or qqplot (the ones created with the `ggplot2` and `qqplotr` packages), you can simply add a `facet_wrap()` function to display the plots separately for each group. 
 
 If you are using the Q-Q plot function from the `car` package, you will need to create separate data objects filtered for each group before generating Q-Q plots for the groups individually.
 
@@ -427,7 +439,7 @@ pwr.t2n.test(n1 = 80, n2= 80, sig.level = 0.05, power = 0.8, alternative = "two.
 
 ## Activity 10: The write-up
 
-We hypothesised that there would be a significant difference in the Simon effect between participants who received the same stimuli in both sessions $(N = 80, M = 35.99 \ \text{msec}, SD = 22.40 \ \text{msec})$ and those who received different stimuli $(N = 80, M = 32.86 \ \text{msec}, SD = 20.79 \ \text{msec})$. A Welch two-sample  t-test revealed the small effect to be non-significant, $t(157.14) = 0.92, p = .360, d = 0.15$. Therefore, we fail to reject the null hypothesis. However, the analysis was underpowered to reliably detect such a small effect.
+We hypothesised that there would be a significant difference in the Simon effect between participants who received the same stimuli in both sessions $(N = 80, M = 35.99 \ \text{msec}, SD = 22.40 \ \text{msec})$ and those who received different stimuli $(N = 80, M = 32.86 \ \text{msec}, SD = 20.79 \ \text{msec})$. A Welch two-sample  t-test revealed the small effect to be non-significant, $t(157.14) = 0.92, p = .360, 95\% CI = [-9.89, 3.61], d = 0.15$. Therefore, we fail to reject the null hypothesis. However, the analysis was underpowered to reliably detect such a small effect.
 
 
 ## Activity 11: Non-parametric alternative {#sec-alternative_two_sample}
