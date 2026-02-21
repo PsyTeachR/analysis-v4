@@ -660,19 +660,19 @@ Solution
 <h4 class="unnumbered" data-anchor-id="step-3-recoding-the-values">Step 3: Recoding the values</h4>
 <p>As we can see now, our <code>lopez_reduced</code> data object could use some tidying.</p>
 <ol type="1">
-<li><code>Sex</code> is a categorical variable, yet, it is currently displayed as numeric, which isn’t ideal. Recode these values according to the <code>Soupbowl_data_dictionary</code>. You could either recode the values as we did in <a href="03-wrangling2.html#sec-wrangling2_act3"><span>Section&nbsp;3.3</span></a>) or convert <code>Sex</code> into a factor if that’s easier (see <a href="04-dataviz.html"><span>Chapter&nbsp;4</span></a> for guidance).</li>
 <li><code>ParticipantID</code> should also be converted into a factor (see <a href="04-dataviz.html"><span>Chapter&nbsp;4</span></a> for guidance).</li>
 <li>Create a new variable called <code>Condition</code> to indicate whether participants are in the Control or Experimental group. Use the <code>Soupbowl_data_dictionary</code> o determine which <code>SeatPosition</code> corresponds to normal bowls (Control) and self-refilling bowls (Experimental). If you’re unsure which function to use, refer to <a href="03-wrangling2.html#sec-wrangling2_act4"><span>Section&nbsp;3.4</span></a>.</li>
 <li><code>CtrlSoupAte</code> and <code>ExpSoupAte</code> can remain separate if we want to focus on these two conditions individually, as we can remove missing values later. However, to calculate correlations across the whole sample, we need these “SoupAte” values in a single column instead of two. We will name this coalesced variable <code>M_postsoup</code> to align with the <code>Soupbowl_data_dictionary</code>.</li>
+<li><code>Sex</code> is a categorical variable, yet, it is currently displayed as numeric, which isn’t ideal. Recode these values according to the <code>Soupbowl_data_dictionary</code>. You could either recode the values as we did in <a href="03-wrangling2.html#sec-wrangling2_act3"><span>Section&nbsp;3.3</span></a>) or convert <code>Sex</code> into a factor if that’s easier (see <a href="04-dataviz.html"><span>Chapter&nbsp;4</span></a> for guidance). <em>Note: Step 4 is not super necessary for the correlation analysis, but it is good practice for sharpening your data wrangling skills.</em></li>
 </ol>
-<p>You should be able to complete recoding tasks 1, 2, and 3 on your own. However, Task 4 involves a new function, so we will walk through it together.</p>
+<p>You should be able to complete recoding tasks 1, 2, and 4 on your own. However, task 3 involves a new function, so we will walk through it together.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solution for Recoding tasks 1-3
+Solution for Recoding tasks 1, 2, and 4
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -680,43 +680,23 @@ Solution for Recoding tasks 1-3
 <div class="callout-body-container callout-body">
 <p>In the panels below, I have created new variables in <code>lopez_reduced</code> to show you solutions for both the <code>case_match()</code> and the <code>factor()</code> approach for recoding <code>Sex</code>. Alternatively, you could simply name your new column <code>Sex</code> to overwrite the numeric values in the existing <code>Sex</code> column.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="layers">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Sex with <code>case_match()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Sex with <code>factor()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">ParticipantID with <code>factor()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Condition with <code>case_when()</code></a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">ParticipantID with <code>factor()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Condition with <code>case_when()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Sex with <code>case_match()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Sex with <code>factor()</code></a></li></ul>
 <div class="tab-content" data-group="layers">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Since no conditional statement is needed, a simple <code>case_match()</code> will suffice. This will create a character column.</p>
+<p>There is not much to it, as the levels and labels don’t need changing.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>lopez_reduced <span class="ot">&lt;-</span> lopez_reduced <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(<span class="at">Sex_case_match =</span> <span class="fu">case_match</span>(Sex,</span>
-<span id="cb5-3"><a href="#cb5-3"></a>                                     <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Male"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4"></a>                                     <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Female"</span>,</span>
-<span id="cb5-5"><a href="#cb5-5"></a>                                     <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Other"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6"></a>                                     <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Prefer not to say"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(<span class="at">ParticipantID =</span> <span class="fu">factor</span>(ParticipantID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Using a factor is helpful if you want to reorder the labels simultaneously. This will create a factor column.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>lopez_reduced <span class="ot">&lt;-</span> lopez_reduced <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">Sex_factor =</span> <span class="fu">factor</span>(Sex,</span>
-<span id="cb6-3"><a href="#cb6-3"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb6-4"><a href="#cb6-4"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>, <span class="st">"Other"</span>, <span class="st">"Prefer not to say"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<p>There is not much to it, as the levels and labels don’t need changing.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>lopez_reduced <span class="ot">&lt;-</span> lopez_reduced <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">mutate</span>(<span class="at">ParticipantID =</span> <span class="fu">factor</span>(ParticipantID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <p>According to the <code>Soupbowl_data_dictionary</code>, even numbers in <code>SeatPosition</code> indicate the Experimental group, and odd numbers represent the Control group. Here we will need to use <code>case_when()</code> because <strong>conditional statements</strong> (see <a href="03-wrangling2.html"><span>Chapter&nbsp;3</span></a> Activity 4 for a refresher).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>lopez_reduced <span class="ot">&lt;-</span> lopez_reduced <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">Condition =</span> <span class="fu">case_when</span>(</span>
-<span id="cb8-3"><a href="#cb8-3"></a>    SeatPosition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Control"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4"></a>    SeatPosition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>) <span class="sc">~</span> <span class="st">"Experimental"</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>lopez_reduced <span class="ot">&lt;-</span> lopez_reduced <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">Condition =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    SeatPosition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Control"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    SeatPosition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>) <span class="sc">~</span> <span class="st">"Experimental"</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -732,13 +712,33 @@ Note
 </div>
 </div>
 </div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Since no conditional statement is needed, a simple <code>case_match()</code> will suffice. This will create a character column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>lopez_reduced <span class="ot">&lt;-</span> lopez_reduced <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">mutate</span>(<span class="at">Sex_case_match =</span> <span class="fu">case_match</span>(Sex,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>                                     <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Male"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>                                     <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Female"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>                                     <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Other"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>                                     <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Prefer not to say"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p>Using a factor is helpful if you want to reorder the labels simultaneously. This will create a factor column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>lopez_reduced <span class="ot">&lt;-</span> lopez_reduced <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">Sex_factor =</span> <span class="fu">factor</span>(Sex,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb8-4"><a href="#cb8-4"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>, <span class="st">"Other"</span>, <span class="st">"Prefer not to say"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p>We want to combine the values from <code>CtrlSoupAte</code> and <code>ExpSoupAte</code> into a single column named <code>M_postsoup</code>. <em>(No idea why the authors called it <code>M_postsoup</code> rather than <code>AllSoupAte</code>. However, since this was one of the columns deleted from the original dataset earlier, we’ll stick with the original variable name as the authors intended.)</em></p>
-<p>Recoding task 4 is straightforward with a function like <code>coalesce()</code>. For each row, it checks the specified columns and finds the first non-missing value at each position. Essentially, R scans the columns row by row, looking for the first available value that isn’t missing and assigns it to the new column. For example:</p>
+</div>
+</div>
+<p>Now, we want to combine the values from <code>CtrlSoupAte</code> and <code>ExpSoupAte</code> into a single column named <code>M_postsoup</code>. <em>(No idea why the authors called it <code>M_postsoup</code> rather than <code>AllSoupAte</code>. However, since this was one of the columns deleted from the original dataset earlier, we’ll stick with the original variable name as the authors intended.)</em></p>
+<p>Recoding task 3 is straightforward with a function like <code>coalesce()</code>. For each row, it checks the specified columns and finds the first non-missing value at each position. Essentially, R scans the columns row by row, looking for the first available value that isn’t missing and assigns it to the new column. For example:</p>
 <ul>
 <li>Participant 1001 has no value in <code>CtrlSoupAte</code> but has a value in <code>ExpSoupAte</code>, so R skips the missing value and assigns 4.5 to the new column.</li>
 <li>Participant 1002 has a value in CtrlSoupAte (3.3), directly assigns it to the new column, and so on.</li>
@@ -764,18 +764,17 @@ Solution for Activity 4 in a single pipe
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>lopez_reduced <span class="ot">&lt;-</span> lopez_data <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="co"># Step 1</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">filter</span>(Included <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="co">#Step 2</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="co"># Step 2</span></span>
 <span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">select</span>(ParticipantID, Age, Sex, OzEstimate, CalEstimate, CtrlSoupAte, ExpSoupAte, SeatPosition) <span class="sc">%&gt;%</span> </span>
 <span id="cb10-6"><a href="#cb10-6"></a>  <span class="co"># Step 3 (I decided to use the factor approach and override my `Sex` column and include it all into the same `mutate()` function)</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">mutate</span>(<span class="at">Sex =</span> <span class="fu">factor</span>(Sex,</span>
-<span id="cb10-8"><a href="#cb10-8"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb10-9"><a href="#cb10-9"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>, <span class="st">"Other"</span>, <span class="st">"Prefer not to say"</span>)),</span>
-<span id="cb10-10"><a href="#cb10-10"></a>         <span class="at">ParticipantID =</span> <span class="fu">factor</span>(ParticipantID),</span>
-<span id="cb10-11"><a href="#cb10-11"></a>         <span class="at">Condition =</span> <span class="fu">case_when</span>(</span>
-<span id="cb10-12"><a href="#cb10-12"></a>           SeatPosition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Control"</span>,</span>
-<span id="cb10-13"><a href="#cb10-13"></a>           SeatPosition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>) <span class="sc">~</span> <span class="st">"Experimental"</span>),</span>
-<span id="cb10-14"><a href="#cb10-14"></a>         <span class="co"># Step 4</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a>         <span class="at">M_postsoup =</span> <span class="fu">coalesce</span>(CtrlSoupAte, ExpSoupAte))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">mutate</span>(<span class="at">ParticipantID =</span> <span class="fu">factor</span>(ParticipantID),</span>
+<span id="cb10-8"><a href="#cb10-8"></a>         <span class="at">Condition =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-9"><a href="#cb10-9"></a>           SeatPosition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Control"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10"></a>           SeatPosition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>) <span class="sc">~</span> <span class="st">"Experimental"</span>),</span>
+<span id="cb10-11"><a href="#cb10-11"></a>         <span class="at">M_postsoup =</span> <span class="fu">coalesce</span>(CtrlSoupAte, ExpSoupAte),</span>
+<span id="cb10-12"><a href="#cb10-12"></a>         <span class="at">Sex =</span> <span class="fu">factor</span>(Sex,</span>
+<span id="cb10-13"><a href="#cb10-13"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb10-14"><a href="#cb10-14"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>, <span class="st">"Other"</span>, <span class="st">"Prefer not to say"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1586,8 +1585,8 @@ Important
 <section id="question-1" class="level4 unnumbered">
 <h4 class="unnumbered" data-anchor-id="question-1">Question 1</h4>
 <p><strong>What is the main purpose of a Pearson correlation?</strong></p>
-<div id="radio_YANCPNZFVZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YANCPNZFVZ" value="answer"> <span>To assess the strength and direction of a linear relationship between two continuous variables.</span></label><label><input type="radio" autocomplete="off" name="radio_YANCPNZFVZ" value="x"> <span>To test for differences in variances between two continuous variables.</span></label><label><input type="radio" autocomplete="off" name="radio_YANCPNZFVZ" value="x"> <span>To determine the monotonic relationship between two ordinal variables.</span></label><label><input type="radio" autocomplete="off" name="radio_YANCPNZFVZ" value="x"> <span>To compare the means of two independent groups.</span></label>
+<div id="radio_XWXEJBWBLU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XWXEJBWBLU" value="x"> <span>To determine the monotonic relationship between two ordinal variables.</span></label><label><input type="radio" autocomplete="off" name="radio_XWXEJBWBLU" value="x"> <span>To compare the means of two independent groups.</span></label><label><input type="radio" autocomplete="off" name="radio_XWXEJBWBLU" value="x"> <span>To test for differences in variances between two continuous variables.</span></label><label><input type="radio" autocomplete="off" name="radio_XWXEJBWBLU" value="answer"> <span>To assess the strength and direction of a linear relationship between two continuous variables.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
@@ -1615,8 +1614,8 @@ Explain this answer
 <section id="question-2" class="level4 unnumbered">
 <h4 class="unnumbered" data-anchor-id="question-2">Question 2</h4>
 <p><strong>Which of the following is a key assumption of the Pearson correlation?</strong></p>
-<div id="radio_KRJXTHHKZY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KRJXTHHKZY" value="x"> <span>The dependent variable is continuous.</span></label><label><input type="radio" autocomplete="off" name="radio_KRJXTHHKZY" value="x"> <span>The two variables are measured on an ordinal, interval, or ratio scale</span></label><label><input type="radio" autocomplete="off" name="radio_KRJXTHHKZY" value="answer"> <span>The relationship between the two variables is linear.</span></label><label><input type="radio" autocomplete="off" name="radio_KRJXTHHKZY" value="x"> <span>The test is robust against outliers.</span></label>
+<div id="radio_AKAXYJZYIC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AKAXYJZYIC" value="x"> <span>The two variables are measured on an ordinal, interval, or ratio scale</span></label><label><input type="radio" autocomplete="off" name="radio_AKAXYJZYIC" value="x"> <span>The dependent variable is continuous.</span></label><label><input type="radio" autocomplete="off" name="radio_AKAXYJZYIC" value="answer"> <span>The relationship between the two variables is linear.</span></label><label><input type="radio" autocomplete="off" name="radio_AKAXYJZYIC" value="x"> <span>The test is robust against outliers.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
@@ -1644,8 +1643,8 @@ Explain this answer
 <section id="question-3" class="level4 unnumbered">
 <h4 class="unnumbered" data-anchor-id="question-3">Question 3</h4>
 <p><strong>You perform a Pearson correlation and find <span class="math inline">\(r(244) = .415, p = .002\)</span>. How would you interpret these results??</strong></p>
-<div id="radio_AQWGMLITBT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AQWGMLITBT" value="x"> <span>There is a moderate, positive, statistically non-significant correlation between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_AQWGMLITBT" value="x"> <span>There is a moderate, negative, statistically non-significant correlation between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_AQWGMLITBT" value="answer"> <span>There is a moderate, positive, statistically significant correlation between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_AQWGMLITBT" value="x"> <span>There is a moderate, negative, statistically significant correlation between the two variables.</span></label>
+<div id="radio_VTSVAHBOPV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VTSVAHBOPV" value="x"> <span>There is a moderate, negative, statistically non-significant correlation between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_VTSVAHBOPV" value="answer"> <span>There is a moderate, positive, statistically significant correlation between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_VTSVAHBOPV" value="x"> <span>There is a moderate, negative, statistically significant correlation between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_VTSVAHBOPV" value="x"> <span>There is a moderate, positive, statistically non-significant correlation between the two variables.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
@@ -1667,8 +1666,8 @@ Explain this answer
 <section id="question-4" class="level4 unnumbered">
 <h4 class="unnumbered" data-anchor-id="question-4">Question 4</h4>
 <p><strong>What does a Spearman correlation coefficient of <span class="math inline">\(rho = -.729\)</span> indicate?</strong></p>
-<div id="radio_MIVFAUKPHR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MIVFAUKPHR" value="answer"> <span>A strong, negative monotonic relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_MIVFAUKPHR" value="x"> <span>A strong, positive monotonic relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_MIVFAUKPHR" value="x"> <span>A strong, negative linear relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_MIVFAUKPHR" value="x"> <span>A non-significant relationship.</span></label>
+<div id="radio_UNQDRSRGXP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UNQDRSRGXP" value="x"> <span>A non-significant relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_UNQDRSRGXP" value="x"> <span>A strong, positive monotonic relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_UNQDRSRGXP" value="answer"> <span>A strong, negative monotonic relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_UNQDRSRGXP" value="x"> <span>A strong, negative linear relationship.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
